@@ -1,14 +1,23 @@
 #!/usr/bin/env node
-const { exec } = require('child_process')
 
-const setupScript = exec('sh ./setup.sh')
+const promptly = require('promptly')
+const { spawnSync } = require( 'child_process' )
 
-setupScript.stdout.on('data', function(data){
-  console.log(data); 
-  // sendBackInfo();
-});
+const setup = async function () {
+  console.log("Starting app rebranding, this can't be undone")
+  const screenname = await promptly.prompt('App screen name: ')
+  const bundlename = await promptly.prompt('App bundle identifier: ')
 
-setupScript.stderr.on('data', function(data){
-  console.log(data);
-  // triggerErrorStuff(); 
-});
+  const rename = spawnSync('npx', [
+    'react-native-rename',
+    screenname,
+    '-b',
+    bundlename
+  ])
+  const install = spawnSync('npm', ['i'])
+  const trashGit = spawnSync('rm', ['-rf', './.git'])
+  const initGit = spawnSync('git', ['init'])
+  console.log('DONE!')
+}
+
+setup()

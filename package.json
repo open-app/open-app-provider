@@ -19,6 +19,7 @@
     "apollo-link-ws": "^1.0.8",
     "apollo-utilities": "^1.0.18",
     "i18next": "^11.6.0",
+    "promptly": "^3.0.3",
     "react": "^16.4.2",
     "react-apollo": "^2.1.11",
     "react-i18next": "^7.11.0",
