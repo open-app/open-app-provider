@@ -8,6 +8,7 @@ import { HttpLink } from 'apollo-boost'
 import { getMainDefinition } from 'apollo-utilities'
 import { RetryLink } from 'apollo-link-retry'
 import makeId from './makeId'
+import childrenWithProps from './childrenWithProps'
 const GRAPHQL_SERVER = 'localhost:4000'
 const SCHEMA_VERSION = '1' // Must be a string.
 const SCHEMA_VERSION_KEY = makeId()
@@ -112,10 +113,11 @@ export class ApolloProvider extends Component {
 
   render() {
     const { client } = this.state
+    const { children } = this.props
     if (client) {
       return (
         <Provider client={client}>
-          {this.props.children}
+          {childrenWithProps(children, this.props)}
         </Provider>
       )
     } else {

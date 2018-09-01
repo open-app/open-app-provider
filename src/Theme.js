@@ -1,13 +1,15 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { ThemeProvider as Provider } from 'styled-components'
 import baseTheme from './baseTheme'
+import childrenWithProps from './childrenWithProps'
 
 
 export class ThemeProvider extends Component {
   render() {
+    const { theme, children } = this.props
     return (
       <Provider theme={theme || baseTheme}>
-       {this.props.children}
+        {childrenWithProps(children, this.props)}
       </Provider>
     )
   }
