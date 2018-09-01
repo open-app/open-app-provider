@@ -95,6 +95,35 @@ async function getApolloClient() {
   return client
 }
 
+export class ApolloProvider extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      client: undefined
+    }
+  }
+  
+  async componentDidMount() {
+    const client = await getApolloClient()
+    this.setState({
+      client
+    })
+  }
+
+  render() {
+    const { client } = this.state
+    if (client) {
+      return (
+        <ApolloProvider client={client}>
+          {this.props.children}
+        </ApolloProvider>
+      )
+    } else {
+      return <ActivityIndicator />
+    }
+  }
+}
+
 export default function ApolloWrapper(CMP) {
   return class ComponentWrapped extends Component {
     constructor(props) {
