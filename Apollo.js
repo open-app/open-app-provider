@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator } from 'react-native'
 // import { CachePersistor } from 'apollo-cache-persist'
-import { ApolloProvider} from 'react-apollo'
+import { ApolloProvider as Provider} from 'react-apollo'
 import { ApolloClient, InMemoryCache } from 'apollo-boost'
 import { WebSocketLink } from 'apollo-link-ws'
 import { HttpLink } from 'apollo-boost'
@@ -114,9 +114,9 @@ export class ApolloProvider extends Component {
     const { client } = this.state
     if (client) {
       return (
-        <ApolloProvider client={client}>
+        <Provider client={client}>
           {this.props.children}
-        </ApolloProvider>
+        </Provider>
       )
     } else {
       return <ActivityIndicator />
@@ -144,9 +144,9 @@ export default function ApolloWrapper(CMP) {
       const { client } = this.state
       if (client) {
         return (
-          <ApolloProvider client={client}>
+          <Provider client={client}>
             <CMP {...this.props} />
-          </ApolloProvider>
+          </Provider>
         )
       } else {
         return <ActivityIndicator />
