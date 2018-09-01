@@ -1,14 +1,14 @@
 import React, { Component } from "react"
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as Provider } from 'styled-components'
 import baseTheme from './baseTheme'
 
 
 export class ThemeProvider extends Component {
   render() {
     return (
-      <ThemeProvider theme={theme || baseTheme}>
+      <Provider theme={theme || baseTheme}>
        {this.props.children}
-      </ThemeProvider>
+      </Provider>
     )
   }
 }
@@ -17,9 +17,9 @@ export default function ThemeWrapper(CMP, theme) {
   return class Wrapped extends Component {
     render() {
       return (
-        <ThemeProvider theme={theme || baseTheme}>
+        <Provider theme={theme || baseTheme}>
           <CMP {...this.props}/>
-        </ThemeProvider>
+        </Provider>
       )
     }
   }
