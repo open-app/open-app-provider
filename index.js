@@ -6,7 +6,7 @@ import childrenWithProps from './src/childrenWithProps'
 
 export default (CMP, theme, i18n) => {
   translate.setI18n(i18n)
-  return translate()(ThemeWrapper(ApolloWrapper(CMP)), theme)
+  return translate()(ThemeWrapper(ApolloWrapper(CMP), theme))
 }
  
 export class Provider extends Component {
