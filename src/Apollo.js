@@ -10,6 +10,7 @@ import { RetryLink } from 'apollo-link-retry'
 import makeId from './makeId'
 import childrenWithProps from './childrenWithProps'
 const GRAPHQL_SERVER = 'localhost:4000'
+const WS_GRAPHQL_SERVER = 'localhost:5000'
 const SCHEMA_VERSION = '1' // Must be a string.
 const SCHEMA_VERSION_KEY = makeId()
 
@@ -59,7 +60,7 @@ async function getApolloClient() {
   //   console.log('ERROR on cache', error)
   // }
   const wsLink = new WebSocketLink({
-    uri: `ws://${GRAPHQL_SERVER}/subscriptions`,
+    uri: `ws://${WS_GRAPHQL_SERVER}/graphql`,
     options: {
       reconnect: true
     }
